@@ -22,7 +22,7 @@ export class ContactPage {
     this.contacUsButton = this.page.getByText("Contact Us");
     this.phoneNumberButton = this.page.getByText("+48 737 357 003");
     this.emailAdressButton = this.page.getByText("kontaktrocketdev@gmail.com");
-    this.privacyPolicyButton = this.page.getByText("Privacy Policy");
+    this.privacyPolicyButton = this.page.locator("div p a.text-accent").nth(1);
   }
 
   async goto() {
@@ -34,38 +34,38 @@ export class ContactPage {
    */
 
   async addUsername(text) {
-    await this.usernameInput.isVisible;
+    await this.usernameInput.isVisible();
     await this.usernameInput.fill(text);
   }
 
   async addEmail(text) {
-    await this.emailInput.isVisible;
+    await this.emailInput.isVisible();
     await this.emailInput.fill(text);
   }
 
   async addRequest(text) {
-    await this.requestInput.isVisible;
+    await this.requestInput.isVisible();
     await this.requestInput.fill(text);
   }
 
   async checkPrivacyPolicy() {
-    await this.privacyPolicyCheckbox.isVisible;
-    await this.privacyPolicyCheckbox.click;
+    await this.privacyPolicyCheckbox.isVisible();
+    await this.privacyPolicyCheckbox.click();
   }
 
   async checkDataProcessing() {
-    await this.dataProcessingCheckbox.isVisible;
-    await this.dataProcessingCheckbox.click;
+    await this.dataProcessingCheckbox.isVisible();
+    await this.dataProcessingCheckbox.click();
   }
 
   async clickSend() {
-    await this.sendButton.isVisible;
-    await this.sendButton.click;
+    await this.sendButton.isVisible();
+    await this.sendButton.click();
   }
 
   async clickContactUs() {
-    await this.contacUsButton.isVisible;
-    await this.contacUsButton.click;
+    await this.contacUsButton.isVisible();
+    await this.contacUsButton.click();
   }
 
   async cloudFlareWorkAround() {
@@ -75,17 +75,17 @@ export class ContactPage {
   }
 
   async getPhoneNumber() {
-    await this.phoneNumberButton.isVisible;
-    await this.phoneNumberButton.click;
+    await this.phoneNumberButton.isVisible();
+    await this.phoneNumberButton.click();
   }
 
   async getEmailAdress() {
-    await this.emailAdressButton.isVisible;
-    await this.emailAdressButton.click;
+    await this.emailAdressButton.isVisible();
+    await this.emailAdressButton.click();
   }
 
   async goToPrivacyPolicy() {
-    await this.privacyPolicyButton.isVisible;
-    await this.privacyPolicyButton.click;
+    await this.privacyPolicyButton.isVisible();
+    await this.privacyPolicyButton.click();
   }
 }

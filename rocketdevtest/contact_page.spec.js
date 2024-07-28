@@ -121,11 +121,13 @@ test("Contact Page - Get Phone and E-mail", async ({ contactPage, page }) => {
   await contactPage.getEmailAdress();
 });
 
+//finish
 test("Contact Page - Privacy policy redirection", async ({
   contactPage,
   page,
 }) => {
   await contactPage.cloudFlareWorkAround();
   await contactPage.goToPrivacyPolicy();
+  await console.log(page.url);
   await expect(page).toHaveURL("https://rocketdev.com.pl/en/privacy-policy");
 });
