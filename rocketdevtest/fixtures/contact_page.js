@@ -9,8 +9,8 @@ export class ContactPage {
   constructor(page) {
     this.page = page;
 
-    this.usernameInput = this.page.getByText("What is your name?");
-    this.emailInput = this.page.getByText("Your email address");
+    this.usernameInput = this.page.locator('input[name="username"]');
+    this.emailInput = this.page.locator('input[name="email"]');
     this.requestInput = this.page.locator('textarea[name="description"]');
     this.dataProcessingCheckbox = this.page.locator(
       'button[aria-label="Consent to the processing of personal data"]'
@@ -82,6 +82,7 @@ export class ContactPage {
   async getEmailAdress() {
     await this.emailAdressButton.isVisible();
     await this.emailAdressButton.click();
+    return this.emailAdressButton.textContent();
   }
 
   async goToPrivacyPolicy() {

@@ -8,12 +8,13 @@ export class HomePage {
     this.homepageButton = this.page.getByText("Homepage");
     this.aboutUsButton = this.page.getByText("About Us");
     this.offerButton = this.page.getByText("Offer");
-    this.faqButton = this.page.getByText("FAQ");
-    this.contactButton = this.page.getByText("Contact");
+    this.faqButton = this.page.locator('li a[href="/en/faq-en"]');
+    this.contactButton = this.page.locator('li a[href="/en/contact"]');
+    this.contactUsBottomButton = this.page.locator('div a[href="/en/contact"]');
     this.contactUsButton = this.page.getByText("Contact Us");
     this.checkOfferButton = this.page.getByText("Check out our offer!");
     this.checkDetailsButton = this.page.getByText("Check details");
-    this.privacyPolicyButton = this.page.getByText("Privacy Policy");
+    this.privacyPolicyButton = this.page.locator("div p a.text-accent");
   }
 
   async goto() {
@@ -32,37 +33,47 @@ export class HomePage {
 
   async navigateOffer() {
     await this.offerButton.isVisible();
-    await this.offerButton.click;
+    await this.offerButton.click();
   }
 
-  async naviagteFAQ() {
+  async navigateFAQ() {
     await this.faqButton.isVisible();
     await this.faqButton.click();
   }
 
-  async naviagetContact() {
+  async navigateContact() {
     await this.contactButton.isVisible();
     await this.contactButton.click();
   }
 
   async checkReadyMadeTemplate() {
     const template_locator = this.page.locator(
-      'div [class="rounded-lg p-1 border-2 border-accent-light"][0]'
+      'div [class="rounded-lg p-1 border-2 border-accent-light"]'
     );
-    await template_locator.getByText("Check details");
+    await template_locator.nth(0).getByText("Check details").click();
   }
 
   async checkIndividualProject() {
     const template_locator = this.page.locator(
       'div [class="rounded-lg p-1 animate-border bg-gradient-to-r from-yellow-400 via-orange-800 to-yellow-400 bg-[length:_400%_400%] [animation-duration:_6s]"]'
     );
-    await template_locator.getByText("Check details");
+    await template_locator.getByText("Check details").click();
   }
 
   async checkGraphicallyCustomizedWebsite() {
     const template_locator = this.page.locator(
-      'div [class="rounded-lg p-1 border-2 border-accent-light"][1]'
+      'div [class="rounded-lg p-1 border-2 border-accent-light"]'
     );
-    await template_locator.getByText("Check details");
+    await template_locator.nth(1).getByText("Check details").click();
+  }
+
+  async goToPrivacyPolicy() {
+    await this.privacyPolicyButton.isVisible();
+    await this.privacyPolicyButton.click();
+  }
+
+  async goToContactUs() {
+    await this.contactUsBottomButton.nth(3).isVisible();
+    await this.contactUsBottomButton.nth(3).click();
   }
 }
