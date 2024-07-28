@@ -1,3 +1,6 @@
+import { randomInt } from "crypto";
+
+const { ContactPageLocators } = require("../locators/contactpage_locators");
 export class ContactPage {
   /**
    *
@@ -5,17 +8,21 @@ export class ContactPage {
    */
   constructor(page) {
     this.page = page;
+
     this.usernameInput = this.page.getByText("What is your name?");
     this.emailInput = this.page.getByText("Your email address");
-    this.requestInput = this.page.locator('name="description"');
+    this.requestInput = this.page.locator('textarea[name="description"]');
     this.dataProcessingCheckbox = this.page.locator(
-      "aria-label='Consent to the processing of personal data'"
+      'button[aria-label="Consent to the processing of personal data"]'
     );
     this.privacyPolicyCheckbox = this.page.locator(
-      'aria-label="Declaration of familiarization with the content of the privacy policy"'
+      'button[aria-label="Declaration of familiarization with the content of the privacy policy"]'
     );
-    this.sendButton = this.page.getByText("Send");
+    this.sendButton = this.page.locator('button[type = "submit"]');
     this.contacUsButton = this.page.getByText("Contact Us");
+    this.phoneNumberButton = this.page.getByText("+48 737 357 003");
+    this.emailAdressButton = this.page.getByText("kontaktrocketdev@gmail.com");
+    this.privacyPolicyButton = this.page.getByText("Privacy Policy");
   }
 
   async goto() {
@@ -42,24 +49,43 @@ export class ContactPage {
   }
 
   async checkPrivacyPolicy() {
+    await this.privacyPolicyCheckbox.isVisible;
     await this.privacyPolicyCheckbox.click;
   }
 
   async checkDataProcessing() {
+    await this.dataProcessingCheckbox.isVisible;
     await this.dataProcessingCheckbox.click;
   }
 
   async clickSend() {
+    await this.sendButton.isVisible;
     await this.sendButton.click;
   }
 
-  async clickContacUs() {
+  async clickContactUs() {
+    await this.contacUsButton.isVisible;
     await this.contacUsButton.click;
   }
 
   async cloudFlareWorkAround() {
-    await this.page.waitForTimeout(3000);
+    await this.page.waitForTimeout(randomInt(1, 3000));
     await this.page.keyboard.press("Space");
-    await this.page.waitForTimeout(3000);
+    await this.page.waitForTimeout(randomInt(1, 3000));
+  }
+
+  async getPhoneNumber() {
+    await this.phoneNumberButton.isVisible;
+    await this.phoneNumberButton.click;
+  }
+
+  async getEmailAdress() {
+    await this.emailAdressButton.isVisible;
+    await this.emailAdressButton.click;
+  }
+
+  async goToPrivacyPolicy() {
+    await this.privacyPolicyButton.isVisible;
+    await this.privacyPolicyButton.click;
   }
 }
