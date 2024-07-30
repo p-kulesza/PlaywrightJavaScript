@@ -1,6 +1,5 @@
 import { randomInt } from "crypto";
 
-const { ContactPageLocators } = require("../locators/contactpage_locators");
 export class ContactPage {
   /**
    *
@@ -63,7 +62,7 @@ export class ContactPage {
     await this.sendButton.click();
   }
 
-  async clickContactUs() {
+  async goToContactUs() {
     await this.contacUsButton.isVisible();
     await this.contacUsButton.click();
   }
@@ -77,6 +76,7 @@ export class ContactPage {
   async getPhoneNumber() {
     await this.phoneNumberButton.isVisible();
     await this.phoneNumberButton.click();
+    return this.phoneNumberButton.textContent();
   }
 
   async getEmailAdress() {

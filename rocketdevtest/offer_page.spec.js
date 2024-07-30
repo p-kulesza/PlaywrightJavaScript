@@ -11,13 +11,13 @@ test("Offer Page - Additional Paid Services Table Data", async ({
   // Table iterations?
   let table = await page.locator("tbody tr");
   let tableCount = await table.count();
-  let text = [];
+  let actual = [];
   for (let i = 16; i < tableCount; i++) {
     const element = await table.nth(i);
     const inner = await element.innerText();
-    text.push(inner);
+    actual.push(inner);
   }
-  console.log(text);
+  console.log(actual);
 });
 
 test("Offer Page - Contact Us Redirect", async ({ offerPage, page }) => {

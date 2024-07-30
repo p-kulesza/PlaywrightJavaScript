@@ -1,17 +1,25 @@
 const { test, expect } = require("./fixtures/pages");
+import { usernameData } from "./data/contact_page_data";
+import { emailData } from "./data/contact_page_data";
+import { requestData } from "./data/contact_page_data";
 
 test.beforeEach("setup", async ({ contactPage }) => {
   await contactPage.goto();
 });
+
+//        Data Preparation
+function randomizer(input) {
+  return input[Math.floor(Math.random() * input.length)];
+}
 
 test(
   "Contact Page - Happy path",
   { tag: "@smoke" },
   async ({ contactPage }) => {
     await contactPage.cloudFlareWorkAround();
-    await contactPage.addUsername("John Doe");
-    await contactPage.addEmail("www.exmaple@mail.com");
-    await contactPage.addRequest("Random request");
+    await contactPage.addUsername(randomizer(usernameData));
+    await contactPage.addEmail(randomizer(emailData));
+    await contactPage.addRequest(randomizer(requestData));
     await contactPage.checkDataProcessing();
     await contactPage.checkPrivacyPolicy();
     await contactPage.clickSend();
@@ -103,7 +111,6 @@ test("Contact Page - Invalid privacy checkbox", async ({
   ).toContainText("This field is required");
 });
 
-/// fomrularz - reset?
 test("Contact Page - Redirection, clean form", async ({
   contactPage,
   page,
@@ -114,7 +121,7 @@ test("Contact Page - Redirection, clean form", async ({
   await contactPage.addRequest("Random request");
   await contactPage.checkDataProcessing();
   await contactPage.checkPrivacyPolicy();
-  await contactPage.clickContactUs();
+  await contactPage.goToContactUs();
   await expect(page.locator('input[name="username"]')).toContainText(" ");
   await expect(page.getByText("Your email address")).toContainText(" ");
   await expect(page.locator('textarea[name="description"]')).toContainText(" ");
@@ -122,12 +129,12 @@ test("Contact Page - Redirection, clean form", async ({
     page.locator(
       'button[aria-label="Consent to the processing of personal data"]'
     )
-  ).toBeDisabled();
+  ).toBeEmpty();
   await expect(
     page.locator(
       'button[aria-label="Declaration of familiarization with the content of the privacy policy"]'
     )
-  ).toBeDisabled();
+  ).toBeEmpty();
 });
 
 test("Contact Page - Empty form", async ({ contactPage, page }) => {
@@ -153,9 +160,9 @@ test("Contact Page - Get Phone and E-mail", async ({ contactPage, page }) => {
   await contactPage.cloudFlareWorkAround();
   await contactPage.getPhoneNumber();
   await contactPage.getEmailAdress();
+  await console.log(contactPage.getPhoneNumber());
 });
 
-//finish
 test("Contact Page - Privacy policy redirection", async ({
   contactPage,
   page,

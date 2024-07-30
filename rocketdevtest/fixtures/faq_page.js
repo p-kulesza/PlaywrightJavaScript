@@ -5,9 +5,12 @@ export class FAQPage {
    */
   constructor(page) {
     this.page = page;
-    this.technicalQuestionsDropdowns = this.page.locator("#faq-tech");
-    this.questionsAboutCooperationDropdowns = this.page.locator("#faq");
-    this.contactUsButton = this.page.locator('[href="/en/contact"]');
+    this.contactUsButtonHead = this.page.locator(
+      '[href="/en/contact"]:nth-child(1)'
+    );
+    this.contactUsButtonFooter = this.page.locator(
+      '[href="/en/contact"]:nth-child(2)'
+    );
     this.privacyPolicyButton = this.page.locator(
       '[href="/en/privacy-policy"] a'
     );
@@ -17,10 +20,18 @@ export class FAQPage {
     await this.page.goto("https://rocketdev.com.pl/en/faq-en");
   }
 
-  async getTechnicalQuestionsDropdown() {
-    await this.technicalQuestionsDropdowns.isVisible();
-    let element = await this.technicalQuestionsDropdowns;
-    let innerText = await element.innerText();
-    return innerText;
+  async goToContactUsHead() {
+    await this.contactUsButtonHead.isVisible();
+    await this.contactUsButtonHead.click();
+  }
+
+  async goToContactUsFooter() {
+    await this.contactUsButtonFooter.isVisible();
+    await this.contactUsButtonFooter.click();
+  }
+
+  async goToPrivacyPolicy() {
+    await this.privacyPolicyButton.isVisible();
+    await this.privacyPolicyButton.click();
   }
 }
