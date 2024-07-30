@@ -8,7 +8,6 @@ test("Offer Page - Additional Paid Services Table Data", async ({
   offerPage,
   page,
 }) => {
-  // Table iterations?
   let table = await page.locator("tbody tr");
   let tableCount = await table.count();
   let actual = [];
@@ -33,7 +32,7 @@ test("Offer Page - Contact Us Redirect", async ({ offerPage, page }) => {
   await expect(page).toHaveURL("https://rocketdev.com.pl/en/contact");
 });
 
-test("Offer Page - FAQ Redirect", async ({ offerPage }) => {
+test("Offer Page - FAQ Redirect", async ({ offerPage, page }) => {
   await offerPage.goToFAQ();
   await expect(page).toHaveURL("https://rocketdev.com.pl/en/faq-en");
 });

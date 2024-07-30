@@ -159,12 +159,10 @@ test("Contact Page - Empty form", async ({ contactPage, page }) => {
   ).toContainText("This field is required");
 });
 
-//validation?
 test("Contact Page - Get Phone and E-mail", async ({ contactPage, page }) => {
   await contactPage.cloudFlareWorkAround();
   await contactPage.getPhoneNumber();
   await contactPage.getEmailAdress();
-  await console.log(contactPage.getPhoneNumber());
 });
 
 test("Contact Page - Privacy policy redirec", async ({ contactPage, page }) => {
