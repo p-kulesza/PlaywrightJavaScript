@@ -19,7 +19,9 @@ export class ContactPage {
     );
     this.sendButton = this.page.locator('button[type = "submit"]');
     this.contacUsButton = this.page.getByText("Contact Us");
-    this.phoneNumberButton = this.page.getByText("+48 737 357 003");
+    this.phoneNumberButton = this.page.locator(
+      'a[class="text-accent hover:text-accent-dark font-semibold not-italic no-underline"]'
+    );
     this.emailAdressButton = this.page.getByText("kontaktrocketdev@gmail.com");
     this.privacyPolicyButton = this.page.locator("div p a.text-accent").nth(1);
   }
@@ -73,17 +75,16 @@ export class ContactPage {
     await this.page.waitForTimeout(randomInt(1, 3000));
   }
 
-  async getPhoneNumber() {
-    await this.phoneNumberButton.isVisible();
-    await this.phoneNumberButton.click();
-    return this.phoneNumberButton.textContent();
-  }
+  // async getPhoneNumber() {
+  //   await this.phoneNumberButton.isVisible();
+  //   const text = await this.phoneNumberButton.innerText();
+  //   return text;
+  // }
 
-  async getEmailAdress() {
-    await this.emailAdressButton.isVisible();
-    await this.emailAdressButton.click();
-    return this.emailAdressButton.textContent();
-  }
+  // async getEmailAdress() {
+  //   await this.emailAdressButton.isVisible();
+  //   return this.emailAdressButton.innerText();
+  // }
 
   async goToPrivacyPolicy() {
     await this.privacyPolicyButton.isVisible();

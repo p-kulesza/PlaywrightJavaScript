@@ -7,7 +7,7 @@ test.beforeEach("setup", async ({ contactPage }) => {
   await contactPage.goto();
 });
 
-//        Data Preparation
+//        Data Randomizer
 function randomizer(input) {
   return input[Math.floor(Math.random() * input.length)];
 }
@@ -28,8 +28,8 @@ test(
 
 test("Contact Page - Invalid name", async ({ contactPage, page }) => {
   await contactPage.cloudFlareWorkAround();
-  await contactPage.addEmail("www.exmaple@mail.com");
-  await contactPage.addRequest("Random request");
+  await contactPage.addEmail(randomizer(emailData));
+  await contactPage.addRequest(randomizer(requestData));
   await contactPage.checkDataProcessing();
   await contactPage.checkPrivacyPolicy();
   await contactPage.clickSend();
@@ -43,8 +43,8 @@ test("Contact Page - Invalid name", async ({ contactPage, page }) => {
 
 test("Contact Page - Invalid email", async ({ contactPage, page }) => {
   await contactPage.cloudFlareWorkAround();
-  await contactPage.addUsername("John Doe");
-  await contactPage.addRequest("Random request");
+  await contactPage.addUsername(randomizer(usernameData));
+  await contactPage.addRequest(randomizer(requestData));
   await contactPage.checkDataProcessing();
   await contactPage.checkPrivacyPolicy();
   await contactPage.clickSend();
@@ -62,13 +62,15 @@ test("Contact Page - Invalid email", async ({ contactPage, page }) => {
 
 test("Contact Page - Invalid description", async ({ contactPage, page }) => {
   await contactPage.cloudFlareWorkAround();
-  await contactPage.addUsername("John Doe");
-  await contactPage.addEmail("www.exmaple@mail.com");
+  await contactPage.addUsername(randomizer(usernameData));
+  await contactPage.addEmail(randomizer(emailData));
   await contactPage.checkDataProcessing();
   await contactPage.checkPrivacyPolicy();
   await contactPage.clickSend();
   await expect(
-    page.locator('div [class="text-sm font-medium text-destructive"]').nth(2)
+    page.locator(
+      'div [class="text-sm font-medium text-destructive"]:nth-child(3)'
+    )
   ).toBeVisible();
   await expect(
     page.locator('div [class="text-sm font-medium text-destructive"]').nth(2)
@@ -80,13 +82,15 @@ test("Contact Page - Invalid processing checkbox", async ({
   page,
 }) => {
   await contactPage.cloudFlareWorkAround();
-  await contactPage.addUsername("John Doe");
-  await contactPage.addEmail("www.exmaple@mail.com");
-  await contactPage.addRequest("Random request");
+  await contactPage.addUsername(randomizer(usernameData));
+  await contactPage.addEmail(randomizer(emailData));
+  await contactPage.addRequest(randomizer(requestData));
   await contactPage.checkPrivacyPolicy();
   await contactPage.clickSend();
   await expect(
-    page.locator('div [class="text-sm font-medium text-destructive"]').nth(3)
+    page.locator(
+      'div [class="text-sm font-medium text-destructive"]:nth-child(4)'
+    )
   ).toBeVisible();
   await expect(
     page.locator('div [class="text-sm font-medium text-destructive"]').nth(3)
@@ -98,9 +102,9 @@ test("Contact Page - Invalid privacy checkbox", async ({
   page,
 }) => {
   await contactPage.cloudFlareWorkAround();
-  await contactPage.addUsername("John Doe");
-  await contactPage.addEmail("www.exmaple@mail.com");
-  await contactPage.addRequest("Random request");
+  await contactPage.addUsername(randomizer(usernameData));
+  await contactPage.addEmail(randomizer(emailData));
+  await contactPage.addRequest(randomizer(requestData));
   await contactPage.checkDataProcessing();
   await contactPage.clickSend();
   await expect(
@@ -116,9 +120,9 @@ test("Contact Page - Redirection, clean form", async ({
   page,
 }) => {
   await contactPage.cloudFlareWorkAround();
-  await contactPage.addUsername("John Doe");
-  await contactPage.addEmail("www.exmaple@mail.com");
-  await contactPage.addRequest("Random request");
+  await contactPage.addUsername(randomizer(usernameData));
+  await contactPage.addEmail(randomizer(emailData));
+  await contactPage.addRequest(randomizer(requestData));
   await contactPage.checkDataProcessing();
   await contactPage.checkPrivacyPolicy();
   await contactPage.goToContactUs();
@@ -163,10 +167,7 @@ test("Contact Page - Get Phone and E-mail", async ({ contactPage, page }) => {
   await console.log(contactPage.getPhoneNumber());
 });
 
-test("Contact Page - Privacy policy redirection", async ({
-  contactPage,
-  page,
-}) => {
+test("Contact Page - Privacy policy redirec", async ({ contactPage, page }) => {
   await contactPage.cloudFlareWorkAround();
   await contactPage.goToPrivacyPolicy();
   await expect(page).toHaveURL("https://rocketdev.com.pl/en/privacy-policy");
