@@ -4,15 +4,19 @@ test.beforeEach("setup", async ({ contactPage }) => {
   await contactPage.goto();
 });
 
-test("Contact Page - Happy path", async ({ contactPage }) => {
-  await contactPage.cloudFlareWorkAround();
-  await contactPage.addUsername("John Doe");
-  await contactPage.addEmail("www.exmaple@mail.com");
-  await contactPage.addRequest("Random request");
-  await contactPage.checkDataProcessing();
-  await contactPage.checkPrivacyPolicy();
-  await contactPage.clickSend();
-});
+test(
+  "Contact Page - Happy path",
+  { tag: "@smoke" },
+  async ({ contactPage }) => {
+    await contactPage.cloudFlareWorkAround();
+    await contactPage.addUsername("John Doe");
+    await contactPage.addEmail("www.exmaple@mail.com");
+    await contactPage.addRequest("Random request");
+    await contactPage.checkDataProcessing();
+    await contactPage.checkPrivacyPolicy();
+    await contactPage.clickSend();
+  }
+);
 
 test("Contact Page - Invalid name", async ({ contactPage, page }) => {
   await contactPage.cloudFlareWorkAround();
