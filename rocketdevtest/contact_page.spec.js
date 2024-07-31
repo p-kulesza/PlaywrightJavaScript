@@ -159,13 +159,10 @@ test("Contact Page - Empty form", async ({ contactPage, page }) => {
   ).toContainText("This field is required");
 });
 
-test("Contact Page - Get Phone and E-mail", async ({ contactPage, page }) => {
-  await contactPage.cloudFlareWorkAround();
-  await contactPage.getPhoneNumber();
-  await contactPage.getEmailAdress();
-});
-
-test("Contact Page - Privacy policy redirec", async ({ contactPage, page }) => {
+test("Contact Page - Privacy policy redirect", async ({
+  contactPage,
+  page,
+}) => {
   await contactPage.cloudFlareWorkAround();
   await contactPage.goToPrivacyPolicy();
   await expect(page).toHaveURL("https://rocketdev.com.pl/en/privacy-policy");

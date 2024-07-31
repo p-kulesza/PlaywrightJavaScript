@@ -1,5 +1,5 @@
 const { test, expect } = require("./fixtures/pages");
-
+import { expectedAdditionalPaidServicesData } from "./data/offer_page_data";
 test.beforeEach("setup", async ({ offerPage }) => {
   await offerPage.goto();
 });
@@ -16,7 +16,7 @@ test("Offer Page - Additional Paid Services Table Data", async ({
     const inner = await element.innerText();
     actual.push(inner);
   }
-  console.log(actual);
+  await expect(actual).toEqual(expectedAdditionalPaidServicesData);
 });
 
 test("Offer Page - Contact Us Redirect", async ({ offerPage, page }) => {

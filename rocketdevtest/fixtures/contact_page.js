@@ -22,7 +22,6 @@ export class ContactPage {
     this.phoneNumberButton = this.page.locator(
       'a[class="text-accent hover:text-accent-dark font-semibold not-italic no-underline"]'
     );
-    this.emailAdressButton = this.page.getByText("kontaktrocketdev@gmail.com");
     this.privacyPolicyButton = this.page.locator("div p a.text-accent").nth(1);
   }
 
@@ -74,17 +73,6 @@ export class ContactPage {
     await this.page.keyboard.press("Space");
     await this.page.waitForTimeout(randomInt(1, 3000));
   }
-
-  // async getPhoneNumber() {
-  //   await this.phoneNumberButton.isVisible();
-  //   const text = await this.phoneNumberButton.innerText();
-  //   return text;
-  // }
-
-  // async getEmailAdress() {
-  //   await this.emailAdressButton.isVisible();
-  //   return this.emailAdressButton.innerText();
-  // }
 
   async goToPrivacyPolicy() {
     await this.privacyPolicyButton.isVisible();

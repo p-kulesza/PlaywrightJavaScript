@@ -14,7 +14,9 @@ export class HomePage {
     this.contactUsButton = this.page.getByText("Contact Us");
     this.checkOfferButton = this.page.getByText("Check out our offer!");
     this.checkDetailsButton = this.page.getByText("Check details");
-    this.privacyPolicyButton = this.page.locator("div p a.text-accent");
+    this.privacyPolicyButton = this.page.locator(
+      "body > header:nth-child(1) > div:nth-child(1) > div:nth-child(2) > nav:nth-child(1) > div:nth-child(1) > ul:nth-child(1) > li:nth-child(4) > a:nth-child(1)"
+    );
   }
 
   async goto() {

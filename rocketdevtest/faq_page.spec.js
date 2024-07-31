@@ -33,7 +33,7 @@ test("FAQ Page - Questions About Cooperation Table Data", async ({ page }) => {
   await expect(actual).toEqual(expetedQuestionsAboutCooperationTableData);
 });
 
-test("FAQ PAge - Contact Us Redirect", async ({ faqPage }) => {
+test("FAQ Page - Contact Us Redirect", async ({ faqPage, page }) => {
   await faqPage.goToContactUsHead();
   await expect(page).toHaveURL("https://rocketdev.com.pl/en/contact");
   await faqPage.goto();
@@ -42,7 +42,7 @@ test("FAQ PAge - Contact Us Redirect", async ({ faqPage }) => {
   await expect(page).toHaveURL("https://rocketdev.com.pl/en/contact");
 });
 
-test("FAQ Page - Privacy Policy Redirect", async ({ faqPage }) => {
+test("FAQ Page - Privacy Policy Redirect", async ({ faqPage, page }) => {
   await faqPage.goToPrivacyPolicy();
   await expect(page).toHaveURL("https://rocketdev.com.pl/en/privacy-policy");
 });
